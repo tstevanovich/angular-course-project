@@ -20,6 +20,9 @@ export class AppComponent {
 
   onSelectUser(id: string) {
     this.selectedUserId.set(id);
-    this.selectedUserName.set(this.users.find((user) => user.id === id)!.name);
+    const user = this.users.find((user) => user.id === id);
+    if (user) {
+      this.selectedUserName.set(user.name);
+    }
   }
 }

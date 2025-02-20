@@ -1,5 +1,10 @@
 import { Component, computed, input, output } from '@angular/core';
 
+interface User {
+  id: string;
+  avatar: string;
+  name: string;
+}
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -8,15 +13,13 @@ import { Component, computed, input, output } from '@angular/core';
   styleUrl: './user.component.scss'
 })
 export class UserComponent {
-  id = input.required<string>();
-  avatar = input.required<string>();
-  name = input.required<string>();
+  user = input.required<User>();
   imagePath = computed(() => {
-    return 'assets/users/' + this.avatar();
+    return 'assets/users/' + this.user().avatar;
   });
   select = output<string>();
 
   onSelectUser() {
-    this.select.emit(this.id());
+    this.select.emit(this.user().id);
   }
 }
