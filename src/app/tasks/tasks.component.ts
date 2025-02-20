@@ -1,5 +1,7 @@
 import { Component, input } from '@angular/core';
 
+import { User } from '../models';
+
 @Component({
   selector: 'app-tasks',
   standalone: true,
@@ -8,5 +10,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent {
-  name = input.required<string>();
+  user = input.required<User | null>();
 }

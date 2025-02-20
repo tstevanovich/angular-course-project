@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { DUMMY_USERS } from './dummy-users';
 import { HeaderComponent } from './header/header.component';
+import { User } from './models';
 import { TasksComponent } from './tasks/tasks.component';
 import { UserComponent } from './user/user.component';
 
@@ -15,14 +16,9 @@ import { UserComponent } from './user/user.component';
 })
 export class AppComponent {
   users = DUMMY_USERS;
-  selectedUserId = signal<string>('u1');
-  selectedUserName = signal<string>('Jasmine Washington');
+  selectedUser = signal<User | null>(null);
 
-  onSelectUser(id: string) {
-    this.selectedUserId.set(id);
-    const user = this.users.find((user) => user.id === id);
-    if (user) {
-      this.selectedUserName.set(user.name);
-    }
+  onSelectUser(user: User) {
+    this.selectedUser.set(user);
   }
 }
