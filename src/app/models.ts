@@ -3,3 +3,11 @@ export interface User {
   avatar: string;
   name: string;
 }
+
+export interface Task {
+  id: string;
+  userId: string;
+  title: string;
+  summary: string;
+  dueDate?: string;
+}
