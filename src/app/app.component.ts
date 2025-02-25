@@ -15,7 +15,7 @@ import { UserComponent } from './user/user.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  users = signal<User[] | null>(DUMMY_USERS);
+  users = signal<User[]>(DUMMY_USERS);
   selectedUser = signal<User | null>(null);
 
   onSelectUser(user: User) {

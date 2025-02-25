@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+
+import { Task } from '../../models';
 
 @Component({
   selector: 'app-task',
@@ -7,4 +9,6 @@ import { Component } from '@angular/core';
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
-export class TaskComponent {}
+export class TaskComponent {
+  task = input.required<Task | null>();
+}
