@@ -10,6 +10,7 @@ import { User } from '../models';
 })
 export class UserComponent {
   user = input.required<User>();
+  selected = input.required<boolean>();
   imagePath = computed(() => {
     return 'assets/users/' + this.user().avatar;
   });
