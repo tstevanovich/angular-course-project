@@ -1,11 +1,12 @@
 import { Component, input, output } from '@angular/core';
 
 import { Task } from '../../models';
+import { CardComponent } from '../../shared/card/card.component';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
