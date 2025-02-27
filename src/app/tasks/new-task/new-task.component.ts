@@ -1,7 +1,8 @@
-import { Component, model, output } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { NewTaskData } from '../../models';
+import { User } from '../../models';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
@@ -11,21 +12,27 @@ import { NewTaskData } from '../../models';
   styleUrl: './new-task.component.scss'
 })
 export class NewTaskComponent {
-  cancelAddTask = output<void>();
-  add = output<NewTaskData>();
+  user = input.required<User | null>();
+  close = output<void>();
   enteredTitle = model<string>('');
   enteredSummary = model<string>('');
   enteredDate = model<string>('');
 
+  constructor(private _tasksService: TasksService) {}
+
   onCancel() {
-    this.cancelAddTask.emit();
+    this.close.emit();
   }
 
   onSubmit() {
-    this.add.emit({
-      title: this.enteredTitle(),
-      summary: this.enteredSummary(),
-      dueDate: this.enteredDate()
-    });
+    this._tasksService.addTask(
+      {
+        title: this.enteredTitle(),
+        summary: this.enteredSummary(),
+        dueDate: this.enteredDate()
+      },
+      this.user()
+    );
+    this.close.emit();
   }
 }
