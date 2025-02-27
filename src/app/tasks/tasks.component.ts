@@ -1,6 +1,7 @@
 import { Component, computed, input, signal } from '@angular/core';
 
 import { Task, User } from '../models';
+import { NewTaskComponent } from './new-task/new-task.component';
 import { TaskComponent } from './task/task.component';
 
 const dummyTasks = [
@@ -30,17 +31,24 @@ const dummyTasks = [
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, NewTaskComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent {
   user = input.required<User | null>();
   tasks = signal<Task[]>(dummyTasks);
+  isAddingTask = signal<boolean>(false);
   selectedUserTasks = computed(() => {
     return this.tasks().filter((task: Task) => task.userId === this.user()?.id);
   });
+
   onCompleteTask(id: string | undefined) {
     this.tasks.set(this.tasks().filter((task: Task) => task.id !== id));
+  }
+
+  onStartAddTask() {
+    this.isAddingTask.set(true);
+    console.log('Start adding task');
   }
 }
